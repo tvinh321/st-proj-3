@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "selenium-webdriver": "^4.6.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0"
   }
 }
