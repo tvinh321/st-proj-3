@@ -10,6 +10,12 @@ const driver = new Builder()
     .build();
 
 // Import each testcases
-const loginTest = require('./testcases/login');
+const loginTest = require('./testcases/TC-LG');
+const enrollTest = require('./testcases/TC-ER');
 
-loginTest(driver);
+async function main() {
+    await loginTest(driver);
+    await enrollTest(driver);
+}
+
+main();

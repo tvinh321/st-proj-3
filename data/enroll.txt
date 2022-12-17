@@ -1,0 +1,2 @@
+student:studentb@abc.com; -- Enroll Student to Course --
+teacher:teacherb@abc.com; -- Enroll Non-editing Teacher to Course --
