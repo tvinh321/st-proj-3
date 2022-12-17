@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "asserts": "^4.0.2",
     "nodemon": "^2.0.20",
     "selenium-webdriver": "^4.6.1"
   },
