@@ -15,13 +15,17 @@ const logoutTest = require("./testcases/TC-LO");
 const enrollTest = require("./testcases/TC-ER");
 const downloadTest = require("./testcases/TC-DF");
 const blogTest = require('./testcases/TC-BL');
+const assignmentSubmissionTest = require('./testcases/TC-AS.js');
 
 async function main() {
+  await driver.manage().window().setRect({ width: 900, height: 1080 });
+
   await loginTest(driver);
   await logoutTest(driver);
   await enrollTest(driver);
   await blogTest(driver);
   await downloadTest(driver);
+  await assignmentSubmissionTest(driver);
 }
 
 main();

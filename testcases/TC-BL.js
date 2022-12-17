@@ -51,8 +51,6 @@ module.exports = async function main(driver) {
 
     for (let i = 0; i < blogsArray.length; i++) {
         await driver.get('https://hihimoodle.gnomio.com/blog/edit.php?action=add');
-        
-        await driver.manage().window().setRect({ width: 900, height: 1080 });
 
         const blogData = blogsArray[i].split(':')[1].split(';');
 
