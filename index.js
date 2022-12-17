@@ -14,11 +14,13 @@ const loginTest = require("./testcases/TC-LG");
 const logoutTest = require("./testcases/TC-LO");
 const enrollTest = require("./testcases/TC-ER");
 const downloadTest = require("./testcases/TC-DF");
+const blogTest = require('./testcases/TC-BL');
 
 async function main() {
   await loginTest(driver);
   await logoutTest(driver);
   await enrollTest(driver);
+  await blogTest(driver);
   await downloadTest(driver);
 }
 

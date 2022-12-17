@@ -3,15 +3,15 @@ const { By } = require('selenium-webdriver')
 
 module.exports = async function main(driver) {
     if (!driver) {
-        console.error("TC-LG Error: Driver Not Found");
+        console.error("TC-ER Error: Driver Not Found");
         return;
     }
 
-    // Get Teacher Account Data
-    const teacherAccount = fs.readFileSync('data/account.txt', 'utf-8');
+    // Get Account Data
+    const accounts = fs.readFileSync('data/account.txt', 'utf-8');
 
     // Split each lines to an array
-    const textData = teacherAccount.split('\r\n');
+    const textData = accounts.split('\r\n');
         
     let username = "";
     let password = "";
@@ -26,11 +26,6 @@ module.exports = async function main(driver) {
         }
     })
 
-    const teacher = {
-        username: username,
-        password: password
-    }
-
     // Login Teacher Account
     await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
     if ((await driver.getCurrentUrl()) !== "https://hihimoodle.gnomio.com/") {
@@ -42,8 +37,8 @@ module.exports = async function main(driver) {
     await driver.findElement(By.id("username")).clear();
     await driver.findElement(By.id("password")).clear();
 
-    await driver.findElement(By.id("username")).sendKeys(teacher.username);
-    await driver.findElement(By.id("password")).sendKeys(teacher.password);
+    await driver.findElement(By.id("username")).sendKeys(username);
+    await driver.findElement(By.id("password")).sendKeys(password);
     await driver.findElement(By.id("loginbtn")).click();
     await driver.wait(async () => {
         const url = await driver.getCurrentUrl();
