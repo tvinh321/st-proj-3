@@ -14,8 +14,9 @@ const loginTest = require("./testcases/TC-LG");
 const logoutTest = require("./testcases/TC-LO");
 const enrollTest = require("./testcases/TC-ER");
 const downloadTest = require("./testcases/TC-DF");
-const blogTest = require('./testcases/TC-BL');
-const assignmentSubmissionTest = require('./testcases/TC-AS.js');
+const blogTest = require("./testcases/TC-BL");
+const assignmentSubmissionTest = require("./testcases/TC-AS.js");
+const courseSearchTest = require("./testcases/TC-CS.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
@@ -26,6 +27,7 @@ async function main() {
   await blogTest(driver);
   await downloadTest(driver);
   await assignmentSubmissionTest(driver);
+  await courseSearchTest(driver);
 }
 
 main();

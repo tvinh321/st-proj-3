@@ -7,11 +7,10 @@ module.exports = async function main(driver) {
     return;
   }
 
-  // Get Teacher Account Data
-  const teacherAccount = fs.readFileSync("data/account.txt", "utf-8");
+  const accountFile = fs.readFileSync("data/account.txt", "utf-8");
 
   // Split each lines to an array
-  const textData = teacherAccount.split("\r\n");
+  const textData = accountFile.split("\r\n");
 
   let username = "";
   let password = "";

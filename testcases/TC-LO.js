@@ -1,4 +1,4 @@
-const assert = require("assert");
+const fs = require("fs");
 const { By } = require("selenium-webdriver");
 
 module.exports = async function main(driver) {
@@ -7,13 +7,34 @@ module.exports = async function main(driver) {
     return;
   }
 
-  const username = "student";
-  const password = "stuDent123!";
+  const accountFile = fs.readFileSync("data/account.txt", "utf-8");
+
+  // Split each lines to an array
+  const textData = accountFile.split("\r\n");
+
+  let username = "";
+  let password = "";
+
+  textData.forEach((line) => {
+    const accountName = line.split(":")[0];
+    const accountInfo = line.split(":")[1];
+
+    if (accountName === "student") {
+      username = accountInfo.split(";")[0];
+      password = accountInfo.split(";")[1];
+      return;
+    }
+  });
+
+  const account = {
+    username: username,
+    password: password,
+  };
 
   //First, login
   await driver.get("https://hihimoodle.gnomio.com/login/index.php");
-  await driver.findElement(By.id("username")).sendKeys(username);
-  await driver.findElement(By.id("password")).sendKeys(password);
+  await driver.findElement(By.id("username")).sendKeys(account.username);
+  await driver.findElement(By.id("password")).sendKeys(account.password);
   await driver.findElement(By.id("loginbtn")).click();
 
   //Logout
