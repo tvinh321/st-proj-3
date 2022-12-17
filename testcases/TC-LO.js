@@ -1,5 +1,4 @@
 const assert = require("assert");
-const fs = require("fs");
 const { By } = require("selenium-webdriver");
 
 module.exports = async function main(driver) {
@@ -11,10 +10,13 @@ module.exports = async function main(driver) {
   const username = "student";
   const password = "stuDent123!";
 
+  //First, login
   await driver.get("https://hihimoodle.gnomio.com/login/index.php");
   await driver.findElement(By.id("username")).sendKeys(username);
   await driver.findElement(By.id("password")).sendKeys(password);
   await driver.findElement(By.id("loginbtn")).click();
+
+  //Logout
   await driver.findElement(By.id("user-menu-toggle")).click();
   await driver.findElement(By.linkText("Log out")).click();
   await driver.findElement(By.css("p:nth-child(5)")).click();
