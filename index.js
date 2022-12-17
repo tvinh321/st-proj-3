@@ -13,11 +13,13 @@ const driver = new Builder()
 const loginTest = require("./testcases/TC-LG");
 const logoutTest = require("./testcases/TC-LO");
 const enrollTest = require("./testcases/TC-ER");
+const downloadTest = require("./testcases/TC-DF");
 
 async function main() {
   await loginTest(driver);
   await logoutTest(driver);
   await enrollTest(driver);
+  await downloadTest(driver);
 }
 
 main();
