@@ -10,6 +10,6 @@ const driver = new Builder()
     .build();
 
 // Import each testcases
-const test1 = require('./testcases/test1');
+const loginTest = require('./testcases/login');
 
-test1(driver);
+loginTest(driver);

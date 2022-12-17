@@ -1,0 +1,6 @@
+login1:;;failed; -- Empty Username & Password --
+login2:;abc;failed; -- Empty Username and Random Password --
+login3:abc;;failed; -- Empty Password and Random Username --
+login4:abc;abc;failed; -- Wrong Username and Wrong Password --
+login5:student;abc;failed; -- Right Username and Wrong Password --
+login6:student;stuDent123!;success; -- Right Username and Right Password --
