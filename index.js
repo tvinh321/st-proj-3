@@ -17,6 +17,7 @@ const downloadTest = require("./testcases/TC-DF");
 const blogTest = require("./testcases/TC-BL");
 const assignmentSubmissionTest = require("./testcases/TC-AS.js");
 const courseSearchTest = require("./testcases/TC-CS.js");
+const courseViewTest = require("./testcases/TC-CV.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
@@ -28,6 +29,7 @@ async function main() {
   await downloadTest(driver);
   await assignmentSubmissionTest(driver);
   await courseSearchTest(driver);
+  await courseViewTest(driver);
 }
 
 main();

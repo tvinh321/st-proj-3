@@ -15,7 +15,6 @@ module.exports = async function main(driver) {
 
   for (let i = 0; i < keywordArray.length; i++) {
     const keyword = keywordArray[i].split(":")[1].split(";");
-
     const key = keyword[0];
     const status = keyword[1];
 
@@ -28,20 +27,20 @@ module.exports = async function main(driver) {
         .findElement(By.xpath(`//h2[contains(.,'Search results')]`))
         .isDisplayed()
         .then(() => {
-          console.log(`TC-CS-${i + 1}: Passed`);
+          console.log(`TC-CS-00${i + 1}: Passed`);
         })
         .catch(() => {
-          console.log(`TC-CS-${i + 1}: Failed`);
+          console.log(`TC-CS-00${i + 1}: Failed`);
         });
     } else if (status === "failed") {
       driver
         .findElement(By.xpath(`//h2[contains(.,'No courses were found')]`))
         .isDisplayed()
         .then(() => {
-          console.log(`TC-CS-${i + 1}: Passed`);
+          console.log(`TC-CS-00${i + 1}: Passed`);
         })
         .catch(() => {
-          console.log(`TC-CS-${i + 1}: Failed`);
+          console.log(`TC-CS-00${i + 1}: Failed`);
         });
     }
   }
