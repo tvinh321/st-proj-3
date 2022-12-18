@@ -6,7 +6,7 @@ const service = new chrome.ServiceBuilder("./browser-drivers/chromedriver.exe");
 
 // options.add_experimental_option('excludeSwitches', ['enable-logging'])
 const options = new chrome.Options();
-options.excludeSwitches(['enable-logging']);
+options.excludeSwitches(["enable-logging"]);
 
 const driver = new Builder()
   .forBrowser("chrome")
@@ -25,20 +25,22 @@ const removeAssignmentTest = require("./testcases/TC-RA.js");
 const courseSearchTest = require("./testcases/TC-CS.js");
 const courseViewTest = require("./testcases/TC-CV.js");
 const responsiveTest = require("./testcases/TC-RE.js");
+const sessionTest = require("./testcases/TC-SE.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
 
-  // await loginTest(driver);
-  // await logoutTest(driver);
-  // await enrollTest(driver);
-  // await blogTest(driver);
-  // await downloadTest(driver);
-  // await assignmentSubmissionTest(driver);
+  await loginTest(driver);
+  await logoutTest(driver);
+  await enrollTest(driver);
+  await blogTest(driver);
+  await downloadTest(driver);
+  await assignmentSubmissionTest(driver);
   await removeAssignmentTest(driver);
-  // await courseSearchTest(driver);
-  // await courseViewTest(driver);
+  await courseSearchTest(driver);
+  await courseViewTest(driver);
   await responsiveTest(driver);
+  await sessionTest(driver);
 }
 
 main();
