@@ -4,7 +4,6 @@ const chrome = require("selenium-webdriver/chrome");
 // This Chrome Driver is for Chrome Browser 108 !!!!
 const service = new chrome.ServiceBuilder("./browser-drivers/chromedriver.exe");
 
-// options.add_experimental_option('excludeSwitches', ['enable-logging'])
 const options = new chrome.Options();
 options.excludeSwitches(["enable-logging"]);
 
@@ -16,7 +15,6 @@ const driver = new Builder()
 
 const firefox = require('selenium-webdriver/firefox');
 
-// This Firefox Driver is for Firefox Browser 108 !!!!
 const firefoxService = new firefox.ServiceBuilder('./browser-drivers/geckodriver.exe');
 
 const firefoxOptions = new firefox.Options();
