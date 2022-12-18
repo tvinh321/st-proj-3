@@ -1,3 +1,4 @@
+linkid:2;
 as1:nofile; -- No files --
 as2:test1mb.pdf;success; -- 1 file with 1 MB --
 as3:test5mb.pdf;success; -- 1 file with 5 MB --
@@ -13,4 +14,4 @@ as12:test1mb.pdf;test1mb - Copy.pdf;test1mb - Copy (2).pdf;maxfile; -- 3 files w
 as13:test5mb.pdf;test5mb - Copy.pdf;test5mb - Copy (2).pdf;maxfile; -- 3 files with 5 MB --
 as14:test9mb.pdf;test9mb - Copy.pdf;test9mb - Copy (2).pdf;maxfile; -- 3 files with 9 MB --
 as15:test10mb.pdf;test10mb - Copy.pdf;test10mb - Copy (2).pdf;maxfile; -- 3 files with 10 MB --
-as16:test11mb.pdf;test11mb - Copy.pdf;test11mb - Copy (2).pdf;maxfile; -- 3 files with 11 MB --
+as16:test11mb.pdf;test11mb - Copy.pdf;test11mb - Copy (2).pdf;maxsize; -- 3 files with 11 MB --

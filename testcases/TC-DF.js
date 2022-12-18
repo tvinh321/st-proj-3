@@ -48,9 +48,9 @@ module.exports = async function main(driver) {
       return url.contains(".pdf");
     }, 5000)
     .then(() => {
-      console.error(`TC-DF-001 Passed`);
+      console.error(`TC-DF-001: Passed`);
     })
     .catch(() => {
-      console.error(`TC-DF-001 Failed`);
+      console.error(`TC-DF-001: Failed`);
     });
 };

@@ -54,19 +54,21 @@ module.exports = async function main(driver) {
 
   const assignmentsubmitArray = assignmentsubmit.split("\r\n");
 
-  for (let i = 0; i < assignmentsubmitArray.length; i++) {
+  const link = assignmentsubmitArray[0].split(":")[1].split(";")[0];
+
+  for (let i = 1; i < assignmentsubmitArray.length; i++) {
     const assignmentData = assignmentsubmitArray[i].split(":")[1].split(";");
     const assignmentResult = assignmentData[assignmentData.length - 2];
     let addButtonDisplayed = true;
     let maxSizeError = false;
 
     await driver.get(
-      "https://hihimoodle.gnomio.com/mod/assign/view.php?id=2&action=removesubmissionconfirm"
+      `https://hihimoodle.gnomio.com/mod/assign/view.php?id=${link}&action=removesubmissionconfirm`
     );
     await driver.findElement(By.css(".btn-primary")).click();
 
     await driver.get(
-      "https://hihimoodle.gnomio.com/mod/assign/view.php?id=2&action=editsubmission"
+      `https://hihimoodle.gnomio.com/mod/assign/view.php?id=${link}&action=editsubmission`
     );
     await driver.sleep(5000);
 
@@ -110,11 +112,11 @@ module.exports = async function main(driver) {
         }
 
         if (errorText.includes("The maximum size you can upload is 10 MB.")) {
-          console.log(`TC-AS-00${i + 1}: Passed`);
+          console.log(`TC-AS-00${i}: Passed`);
           maxSizeError = true;
           break;
         } else {
-          console.log(`TC-AS-00${i + 1}: Failed`);
+          console.log(`TC-AS-00${i}: Failed`);
         }
       }
     }
@@ -125,9 +127,9 @@ module.exports = async function main(driver) {
 
     if (assignmentResult === "maxfile") {
       if (addButtonDisplayed) {
-        console.log(`TC-AS-00${i + 1}: Failed`);
+        console.log(`TC-AS-00${i}: Failed`);
       } else {
-        console.log(`TC-AS-00${i + 1}: Passed`);
+        console.log(`TC-AS-00${i}: Passed`);
       }
 
       await driver.findElement(By.id("id_cancel")).click();
@@ -154,9 +156,9 @@ module.exports = async function main(driver) {
       }
 
       if (result) {
-        console.log(`TC-AS-00${i + 1}: Passed`);
+        console.log(`TC-AS-00${i}: Passed`);
       } else {
-        console.log(`TC-AS-00${i + 1}: Failed`);
+        console.log(`TC-AS-00${i}: Failed`);
       }
     } else if (assignmentResult === "nofile") {
       const errorText = String(
@@ -165,9 +167,9 @@ module.exports = async function main(driver) {
       const result = errorText.includes("Nothing was submitted");
 
       if (result) {
-        console.log(`TC-AS-00${i + 1}: Passed`);
+        console.log(`TC-AS-00${i}: Passed`);
       } else {
-        console.log(`TC-AS-00${i + 1}: Failed`);
+        console.log(`TC-AS-00${i}: Failed`);
       }
     }
   }

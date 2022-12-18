@@ -1,0 +1,10 @@
+https://hihimoodle.gnomio.com/
+https://hihimoodle.gnomio.com/login/index.php
+https://hihimoodle.gnomio.com/my/
+https://hihimoodle.gnomio.com/my/courses.php
+https://hihimoodle.gnomio.com/course/view.php?id=2
+https://hihimoodle.gnomio.com/user/profile.php
+https://hihimoodle.gnomio.com/grade/report/overview/index.php
+https://hihimoodle.gnomio.com/calendar/view.php?view=month
+https://hihimoodle.gnomio.com/user/files.php
+https://hihimoodle.gnomio.com/reportbuilder/index.php
