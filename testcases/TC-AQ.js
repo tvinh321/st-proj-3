@@ -39,17 +39,39 @@ module.exports = async function main(driver) {
       return url == "https://hihimoodle.gnomio.com/login/index.php";
     }, 1000)
     .then(() => {
-      console.error(`TC-CV-001: Passed`);
+      console.error(`TC-AQ-001: Passed`);
     })
     .catch(() => {
-      console.error(`TC-CV-001: Failed`);
+      console.error(`TC-AQ-001: Failed`);
     });
 
   //Login cases
-  // await driver.get("https://hihimoodle.gnomio.com/login/index.php");
-  // await driver.findElement(By.id("username")).sendKeys(account.username);
-  // await driver.findElement(By.id("password")).sendKeys(account.password);
-  // await driver.findElement(By.id("loginbtn")).click();
+  await driver.get("https://hihimoodle.gnomio.com/course/view.php?id=2");
+  await driver.findElement(By.id("username")).sendKeys(account.username);
+  await driver.findElement(By.id("password")).sendKeys(account.password);
+  await driver.findElement(By.id("loginbtn")).click();
 
- 
+  const quizzes = fs.readFileSync("data/attemptquiz.txt", "utf-8");
+  const quizArray = quizzes.split("\r\n");
+
+  for (let i = 0; i < quizArray.length; i++) {
+    const quiz = quizArray[i].split(":")[1].split(";");
+    const name = quiz[0];
+    const status = quiz[1];
+
+    await driver.findElement(By.linkText(name)).click();
+    await driver.manage().window().setRect({ width: 500, height: 720 });
+
+    if (status == "success") {
+      await driver
+        .findElement(By.xpath("//button[contains(.,'Attempt quiz')]"))
+        .isDisplayed()
+        .then(() => {
+          console.log(`TC-AQ-00${i + 2}: Passed`);
+        })
+        .catch(() => {
+          console.log(`TC-AQ-00${i + 2}: Failed`);
+        });
+    }
+  }
 };
