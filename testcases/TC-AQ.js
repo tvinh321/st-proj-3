@@ -46,7 +46,7 @@ module.exports = async function main(driver) {
     });
 
   //Login cases
-  await driver.get("https://hihimoodle.gnomio.com/course/view.php?id=2");
+  await driver.get("https://hihimoodle.gnomio.com/login/index.php");
   await driver.findElement(By.id("username")).sendKeys(account.username);
   await driver.findElement(By.id("password")).sendKeys(account.password);
   await driver.findElement(By.id("loginbtn")).click();
@@ -59,6 +59,7 @@ module.exports = async function main(driver) {
     const name = quiz[0];
     const status = quiz[1];
 
+    await driver.get("https://hihimoodle.gnomio.com/course/view.php?id=2");
     await driver.findElement(By.linkText(name)).click();
     await driver.manage().window().setRect({ width: 500, height: 720 });
 
@@ -71,6 +72,16 @@ module.exports = async function main(driver) {
         })
         .catch(() => {
           console.log(`TC-AQ-00${i + 2}: Failed`);
+        });
+    } else if (status == "failed") {
+      await driver
+        .findElement(By.xpath("//button[contains(.,'Attempt quiz')]"))
+        .isDisplayed()
+        .then(() => {
+          console.log(`TC-AQ-00${i + 2}: Failed`);
+        })
+        .catch(() => {
+          console.log(`TC-AQ-00${i + 2}: Passed`);
         });
     }
   }
