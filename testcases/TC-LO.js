@@ -7,50 +7,40 @@ module.exports = async function main(driver) {
     return;
   }
 
-  const accountFile = fs.readFileSync("data/account.txt", "utf-8");
+  // Read Data from Login Testcase Data
+  const data = fs.readFileSync("data/account.txt", "utf-8");
+  const accountData = data.split("\r\n");
 
-  // Split each lines to an array
-  const textData = accountFile.split("\r\n");
+  //Login Test with each data
+  for (let i = 0; i < accountData.length; i++) {
+    const account = accountData[i].split(":")[1].split(";");
+    const username = account[0];
+    const password = account[1];
 
-  let username = "";
-  let password = "";
+    await driver.get("https://hihimoodle.gnomio.com/login/index.php");
 
-  textData.forEach((line) => {
-    const accountName = line.split(":")[0];
-    const accountInfo = line.split(":")[1];
+    await driver.findElement(By.id("username")).clear();
+    await driver.findElement(By.id("password")).clear();
 
-    if (accountName === "student") {
-      username = accountInfo.split(";")[0];
-      password = accountInfo.split(";")[1];
-      return;
-    }
-  });
+    await driver.findElement(By.id("username")).sendKeys(username);
+    await driver.findElement(By.id("password")).sendKeys(password);
+    await driver.findElement(By.id("loginbtn")).click();
 
-  const account = {
-    username: username,
-    password: password,
-  };
+    //Logout
+    await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
 
-  //First, login
-  await driver.get("https://hihimoodle.gnomio.com/login/index.php");
-  await driver.findElement(By.id("username")).sendKeys(account.username);
-  await driver.findElement(By.id("password")).sendKeys(account.password);
-  await driver.findElement(By.id("loginbtn")).click();
+    await driver
+      .findElement(By.xpath(`//h4[contains(.,'Confirm')]`))
+      .isDisplayed()
+      .then(() => {
+        console.log(`TC-LO-00${i + 1}: Passed`);
+      })
+      .catch(() => {
+        console.error(`TC-LO-00${i + 1}: Failed`);
+      });
 
-  //Logout
-  await driver.findElement(By.id("user-menu-toggle")).click();
-  await driver.findElement(By.linkText("Log out")).click();
-  await driver.findElement(By.css("p:nth-child(5)")).click();
-
-  await driver
-    .wait(async () => {
-      const url = await driver.getCurrentUrl();
-      return url === "https://hihimoodle.gnomio.com/";
-    }, 500)
-    .then(() => {
-      console.error(`TC-LO-001: Passed`);
-    })
-    .catch(() => {
-      console.error(`TC-LO-001: Failed`);
-    });
+    await driver
+      .findElement(By.xpath("//button[contains(.,'Continue')]"))
+      .click();
+  }
 };
