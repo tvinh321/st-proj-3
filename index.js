@@ -44,6 +44,7 @@ async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
   await firefoxDriver.manage().window().setRect({ width: 900, height: 1080 });
 
+  console.log("Chrome Testing Started");
   // await loginTest(driver);
   // await logoutTest(driver);
   // await enrollTest(driver);
@@ -57,6 +58,7 @@ async function main() {
   // await sessionTest(driver);
   await attemptQuizTest(driver);
 
+  console.log("Firefox Testing Started");
   // await loginTest(firefoxDriver);
   // await logoutTest(firefoxDriver);
   // await enrollTest(firefoxDriver);
