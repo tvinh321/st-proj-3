@@ -45,7 +45,7 @@ module.exports = async function main(driver) {
   await driver
     .wait(async () => {
       const url = await driver.getCurrentUrl();
-      return url.contains(".pdf");
+      return url.includes(".pdf");
     }, 5000)
     .then(() => {
       console.error(`TC-DF-001: Passed`);

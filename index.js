@@ -46,10 +46,10 @@ async function main() {
 
   console.log("Chrome Testing Started");
   // await loginTest(driver);
-  await logoutTest(driver);
+  // await logoutTest(driver);
   // await enrollTest(driver);
   // await blogTest(driver);
-  // await downloadTest(driver);
+  await downloadTest(driver);
   // await assignmentSubmissionTest(driver);
   // await removeAssignmentTest(driver);
   // await courseSearchTest(driver);
@@ -60,10 +60,10 @@ async function main() {
 
   console.log("Firefox Testing Started");
   // await loginTest(firefoxDriver);
-  await logoutTest(firefoxDriver);
+  // await logoutTest(firefoxDriver);
   // await enrollTest(firefoxDriver);
   // await blogTest(firefoxDriver);
-  // await downloadTest(firefoxDriver);
+  await downloadTest(firefoxDriver);
   // await assignmentSubmissionTest(firefoxDriver);
   // await removeAssignmentTest(firefoxDriver);
   // await courseSearchTest(firefoxDriver);
