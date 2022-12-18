@@ -26,21 +26,23 @@ const courseSearchTest = require("./testcases/TC-CS.js");
 const courseViewTest = require("./testcases/TC-CV.js");
 const responsiveTest = require("./testcases/TC-RE.js");
 const sessionTest = require("./testcases/TC-SE.js");
+const attemptQuizTest = require("./testcases/TC-AQ.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
 
-  await loginTest(driver);
-  await logoutTest(driver);
-  await enrollTest(driver);
-  await blogTest(driver);
-  await downloadTest(driver);
-  await assignmentSubmissionTest(driver);
-  await removeAssignmentTest(driver);
-  await courseSearchTest(driver);
-  await courseViewTest(driver);
-  await responsiveTest(driver);
-  await sessionTest(driver);
+  // await loginTest(driver);
+  // await logoutTest(driver);
+  // await enrollTest(driver);
+  // await blogTest(driver);
+  // await downloadTest(driver);
+  // await assignmentSubmissionTest(driver);
+  // await removeAssignmentTest(driver);
+  // await courseSearchTest(driver);
+  // await courseViewTest(driver);
+  // await responsiveTest(driver);
+  // await sessionTest(driver);
+  await attemptQuizTest(driver);
 }
 
 main();
