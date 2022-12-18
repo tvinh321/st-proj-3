@@ -46,22 +46,29 @@ module.exports = async function main(driver) {
     });
 
   //Login cases
-  await driver.get("https://hihimoodle.gnomio.com/login/index.php");
-  await driver.findElement(By.id("username")).sendKeys(account.username);
-  await driver.findElement(By.id("password")).sendKeys(account.password);
-  await driver.findElement(By.id("loginbtn")).click();
-
   const quizzes = fs.readFileSync("data/attemptquiz.txt", "utf-8");
   const quizArray = quizzes.split("\r\n");
 
   for (let i = 0; i < quizArray.length; i++) {
+    await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
+    if ((await driver.getCurrentUrl()) !== "https://hihimoodle.gnomio.com/") {
+      await driver
+        .findElement(By.xpath("//button[contains(.,'Continue')]"))
+        .click();
+    }
+
     const quiz = quizArray[i].split(":")[1].split(";");
-    const name = quiz[0];
+    const id = quiz[0];
     const status = quiz[1];
 
-    await driver.get("https://hihimoodle.gnomio.com/course/view.php?id=2");
-    await driver.findElement(By.linkText(name)).click();
-    await driver.manage().window().setRect({ width: 500, height: 720 });
+    await driver.get(
+      `https://hihimoodle.gnomio.com/mod/quiz/view.php?id=${id}`
+    );
+    await driver.findElement(By.id("username")).clear();
+    await driver.findElement(By.id("password")).clear();
+    await driver.findElement(By.id("username")).sendKeys(account.username);
+    await driver.findElement(By.id("password")).sendKeys(account.password);
+    await driver.findElement(By.id("loginbtn")).click();
 
     if (status == "success") {
       await driver
@@ -75,14 +82,50 @@ module.exports = async function main(driver) {
         });
     } else if (status == "failed") {
       await driver
-        .findElement(By.xpath("//button[contains(.,'Attempt quiz')]"))
+        .findElement(By.xpath("//button[contains(.,'Back to the course')]"))
         .isDisplayed()
         .then(() => {
-          console.log(`TC-AQ-00${i + 2}: Failed`);
+          console.log(`TC-AQ-00${i + 2}: Passed`);
         })
         .catch(() => {
+          console.log(`TC-AQ-00${i + 2}: Failed`);
+        });
+    } else if (status === "notenrolled") {
+      await driver
+        .wait(async () => {
+          const message = await driver.findElement(By.id("notice"));
+          return message.getText(`You cannot enrol yourself in this course.`);
+        }, 500)
+        .then(() => {
           console.log(`TC-AQ-00${i + 2}: Passed`);
+        })
+        .catch(() => {
+          console.log(`TC-AQ-00${i + 2}: Failed`);
         });
     }
   }
+
+  // Special Testcase: Login as Guest
+  await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
+  if (driver.getCurrentUrl() !== "https://hihimoodle.gnomio.com/") {
+    await driver
+      .findElement(By.xpath("//button[contains(.,'Continue')]"))
+      .click();
+  }
+
+  await driver.get(`https://hihimoodle.gnomio.com/mod/quiz/view.php?id=12`);
+  await driver.findElement(By.id("loginguestbtn")).click();
+  await driver
+    .wait(async () => {
+      const message = await driver.findElement(By.id("notice"));
+      return message.getText(
+        `Guests cannot access this course. Please log in.`
+      );
+    }, 500)
+    .then(() => {
+      console.log(`TC-AQ-00${quizArray.length + 2}: Passed`);
+    })
+    .catch(() => {
+      console.log(`TC-AQ-00${quizArray.length + 2}: Failed`);
+    });
 };
