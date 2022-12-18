@@ -32,10 +32,16 @@ module.exports = async function main(driver) {
     const courseId = data[2];
     const status = data[3];
 
+    await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
+    if ((await driver.getCurrentUrl()) !== "https://hihimoodle.gnomio.com/") {
+      await driver
+        .findElement(By.xpath("//button[contains(.,'Continue')]"))
+        .click();
+    }
+
     await driver.get(
       `https://hihimoodle.gnomio.com/course/view.php?id=${courseId}`
     );
-
     await driver.findElement(By.id("username")).clear();
     await driver.findElement(By.id("password")).clear();
     await driver.findElement(By.id("username")).sendKeys(username);
@@ -43,9 +49,21 @@ module.exports = async function main(driver) {
     await driver.findElement(By.id("loginbtn")).click();
 
     if (status === "success") {
-      driver
-        .findElement(By.linkText("Grades"))
+      await driver
+        .findElement(By.linkText("Participants"))
         .isDisplayed()
+        .then(() => {
+          console.log(`TC-CV-00${i + 2}: Passed`);
+        })
+        .catch(() => {
+          console.log(`TC-CV-00${i + 2}: Failed`);
+        });
+    } else if (status === "failed") {
+      await driver
+        .wait(async () => {
+          const message = await driver.findElement(By.id("notice"));
+          return message.getText(`You cannot enrol yourself in this course.`);
+        }, 500)
         .then(() => {
           console.log(`TC-CV-00${i + 2}: Passed`);
         })
@@ -54,4 +72,28 @@ module.exports = async function main(driver) {
         });
     }
   }
+
+  // Special Testcase: Login as Guest
+  await driver.get("https://hihimoodle.gnomio.com/login/logout.php");
+  if (driver.getCurrentUrl() !== "https://hihimoodle.gnomio.com/") {
+    await driver
+      .findElement(By.xpath("//button[contains(.,'Continue')]"))
+      .click();
+  }
+
+  await driver.get(`https://hihimoodle.gnomio.com/course/view.php?id=2`);
+  await driver.findElement(By.id("loginguestbtn")).click();
+  await driver
+    .wait(async () => {
+      const message = await driver.findElement(By.id("notice"));
+      return message.getText(
+        `Guests cannot access this course. Please log in.`
+      );
+    }, 500)
+    .then(() => {
+      console.log(`TC-CV-00${textData.length + 2}: Passed`);
+    })
+    .catch(() => {
+      console.log(`TC-CV-00${textData.length + 2}: Failed`);
+    });
 };

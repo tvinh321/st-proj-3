@@ -1,1 +1,2 @@
-view1:student;stuDent123!;2;success
+view1:student;stuDent123!;2;success; -- Enrolled Course --
+view2:student;stuDent123!;3;failed;  -- Not enrolled Course --
