@@ -14,6 +14,20 @@ const driver = new Builder()
   .setChromeOptions(options)
   .build();
 
+const firefox = require('selenium-webdriver/firefox');
+
+// This Firefox Driver is for Firefox Browser 108 !!!!
+const firefoxService = new firefox.ServiceBuilder('./browser-drivers/geckodriver.exe');
+
+const firefoxOptions = new firefox.Options();
+firefoxOptions.setBinary('C:\\Program Files\\Mozilla Firefox\\firefox.exe');
+
+const firefoxDriver = new Builder()
+  .forBrowser('firefox')
+  .setFirefoxService(firefoxService)
+  .setFirefoxOptions(firefoxOptions)
+  .build();
+
 // Import each testcases
 const loginTest = require("./testcases/TC-LG");
 const logoutTest = require("./testcases/TC-LO");
@@ -30,6 +44,7 @@ const attemptQuizTest = require("./testcases/TC-AQ.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
+  await firefoxDriver.manage().window().setRect({ width: 900, height: 1080 });
 
   // await loginTest(driver);
   // await logoutTest(driver);
@@ -43,6 +58,19 @@ async function main() {
   // await responsiveTest(driver);
   // await sessionTest(driver);
   await attemptQuizTest(driver);
+
+  // await loginTest(firefoxDriver);
+  // await logoutTest(firefoxDriver);
+  // await enrollTest(firefoxDriver);
+  // await blogTest(firefoxDriver);
+  // await downloadTest(firefoxDriver);
+  // await assignmentSubmissionTest(firefoxDriver);
+  // await removeAssignmentTest(firefoxDriver);
+  // await courseSearchTest(firefoxDriver);
+  // await courseViewTest(firefoxDriver);
+  // await responsiveTest(firefoxDriver);
+  // await sessionTest(firefoxDriver);
+  await attemptQuizTest(firefoxDriver);
 }
 
 main();
