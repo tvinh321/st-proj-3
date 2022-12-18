@@ -48,9 +48,9 @@ module.exports = async function main(driver) {
       return url === "https://hihimoodle.gnomio.com/";
     }, 500)
     .then(() => {
-      console.error(`TC-LO-001 Passed`);
+      console.error(`TC-LO-001: Passed`);
     })
     .catch(() => {
-      console.error(`TC-LO-001 Failed`);
+      console.error(`TC-LO-001: Failed`);
     });
 };

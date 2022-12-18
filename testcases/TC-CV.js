@@ -15,10 +15,10 @@ module.exports = async function main(driver) {
       return url == "https://hihimoodle.gnomio.com/login/index.php";
     }, 1000)
     .then(() => {
-      console.error(`TC-CV-001 Passed`);
+      console.error(`TC-CV-001: Passed`);
     })
     .catch(() => {
-      console.error(`TC-CV-001 Failed`);
+      console.error(`TC-CV-001: Failed`);
     });
 
   //Login cases

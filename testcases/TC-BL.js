@@ -80,19 +80,19 @@ module.exports = async function main(driver) {
         if (blogStatus === "success") {
             const url = await driver.getCurrentUrl();
             if (url.includes("https://hihimoodle.gnomio.com/blog/index.php")) {
-                console.log(`TC-BL-00${i+1} Passed`);
+                console.log(`TC-BL-00${i+1}: Passed`);
             }
             else {
-                console.error(`TC-BL-00${i+1} Failed`);
+                console.error(`TC-BL-00${i+1}: Failed`);
             }
         }
         else if (blogStatus === "failed") {
             const url = await driver.getCurrentUrl();
             if (url === "https://hihimoodle.gnomio.com/blog/edit.php?action=add") {
-                console.log(`TC-BL-00${i+1} Passed`);
+                console.log(`TC-BL-00${i+1}: Passed`);
             }
             else {
-                console.error(`TC-BL-00${i+1} Failed`);
+                console.error(`TC-BL-00${i+1}: Failed`);
             }
         }
         else {

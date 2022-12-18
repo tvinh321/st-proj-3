@@ -50,14 +50,14 @@ module.exports = async function main(driver) {
                 const url = await driver.getCurrentUrl();
                 return url === "https://hihimoodle.gnomio.com/my/";
             }, 5000);
-            console.log(`TC-LG-00${i+1} Passed`);
+            console.log(`TC-LG-00${i+1}: Passed`);
         }
         else if (status === "failed") {
             await driver.wait(async () => {
                 const url = await driver.getCurrentUrl();
                 return url === "https://hihimoodle.gnomio.com/login/index.php";
             }, 5000);
-            console.log(`TC-LG-00${i+1} Passed`);
+            console.log(`TC-LG-00${i+1}: Passed`);
         }
         else {
             console.error(`TC-LG-00${i+1} Error: Status Input Invalid`);
@@ -77,8 +77,8 @@ module.exports = async function main(driver) {
         return url === "https://hihimoodle.gnomio.com/";
     }, 5000)
     .catch(() => {
-        console.error(`TC-LG-00${loginData.length+1} Failed`);
+        console.error(`TC-LG-00${loginData.length+1}: Failed`);
     });
     
-    console.log(`TC-LG-00${loginData.length+1} Passed`);
+    console.log(`TC-LG-00${loginData.length+1}: Passed`);
 }
