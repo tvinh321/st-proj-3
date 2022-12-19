@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { By } = require("selenium-webdriver");
+const { By, Key } = require("selenium-webdriver");
 
 module.exports = async function main(driver) {
     if (!driver) {
@@ -52,16 +52,14 @@ module.exports = async function main(driver) {
         "utf-8"
     );
     const messageArray = message.split("\r\n");
-
-    for (let i = 0; i < messageArray.length; i++) {
-        const msg = messageArray[i].split(":")[1].split(";");
+    
+    // View testing
+        const msg = messageArray[0].split(":")[1].split(";");
         const msgTask = msg[0];
         const msgStatus = msg[1];
-        // await driver.get(urlLink);
 
-        // View testing
-        await driver.findElement(By.xpath("//a[@data-region='popover-region-messages']")).click();
-        const starred = await driver.findElement(By.xpath("//span[contains(.,'Starred')]"))
+        await driver.findElement(By.css(".fa-comment-o")).click()
+        const grouped = await driver.findElement(By.css("#view-overview-group-messages-toggle .collapsed-icon-container > .icon"))
         .then(
             (element) => {
               return element;
@@ -70,10 +68,84 @@ module.exports = async function main(driver) {
               return null;
             }
         );
-        if (starred && msgStatus === "success")
-            console.log(`TC-MS-00${i + 1}: Passed`);
+        if (grouped && msgStatus === "success")
+            console.log(`TC-MS-00${1}: Passed`);
         else 
-            console.error(`TC-MS-00${i + 1}: Failed`);
+            console.log(`TC-MS-00${1}: Failed`);
+
+    // Search testing
+        const msg1 = messageArray[1].split(":")[1].split(";");
+        const msgTask1 = msg1[0];
+        const msgStatus1 = msg1[1];
+
+        await driver.findElement(By.css(".simplesearchform:nth-child(1) > .form-control")).click()
+        await driver.findElement(By.css(".input-group:nth-child(2) > .form-control")).sendKeys("Student Student")
+        await driver.findElement(By.css(".input-group:nth-child(2) > .form-control")).sendKeys(Key.ENTER)
+        const foundStudent =  await driver.findElement(By.className("list-group"))
+        .then(
+            (element) => {
+              return element;
+            },
+            (error) => {
+              return null;
+            }
+        );
+        
+        if (foundStudent && msgStatus1 === "success")
+            console.log(`TC-MS-00${2}: Passed`);
+        else
+            console.error(`TC-MS-00${2}: Failed`);
     
-    }
+    // Send testing
+        const msg2 = messageArray[2].split(":")[1].split(";");
+        const msgTask2 = msg2[0];
+        const msgStatus2 = msg2[1];
+
+        await driver.sleep(5000);
+
+        await driver.findElement(By.xpath("/html/body/div[3]/div[7]/div/div[3]/div[6]/div[1]/div/div[1]/div[2]/div")).click()
+        await driver.sleep(5000);
+        await driver.findElement(By.xpath("/html/body/div[3]/div[7]/div/div[4]/div[1]/div[1]/div[2]/textarea")).click()
+        await driver.sleep(5000);
+        await driver.findElement(By.xpath("/html/body/div[3]/div[7]/div/div[4]/div[1]/div[1]/div[2]/textarea")).sendKeys(msgTask2);
+        await driver.findElement(By.css(".fa-paper-plane")).click()
+        // await driver.findElement(By.css(".mt-auto")).click()
+        const sentmsg = driver.findElement(By.xpath(`//div[contains(.,'${msgTask2}')]`))
+        .then(
+            (element) => {
+              return element;
+            },
+            (error) => {
+              return null;
+            }
+        );
+        
+        if (sentmsg && msgStatus2 === "success")
+            console.log(`TC-MS-00${3}: Passed`);
+        else
+            console.error(`TC-MS-00${3}: Failed`);
+    // Delete Testing
+        const msg3 = messageArray[3].split(":")[1].split(";");
+        const msgTask3 = msg3[0];
+        const msgStatus3 = msg3[1];
+
+        await driver.findElement(By.css(".fa-ellipsis-h")).click()
+        await driver.sleep(5000);
+        await driver.findElement(By.linkText("Delete conversation")).click()
+        await driver.sleep(5000);
+        await driver.findElement(By.css(".btn-primary:nth-child(8)")).click()
+        await driver.sleep(5000);
+        const msglost = driver.findElement(By.xpath("//p[contains(.,'Personal space')]"))
+        .then(
+            (element) => {
+              return element;
+            },
+            (error) => {
+              return null;
+            }
+        );
+        if (msglost && msgStatus3 === "success")
+            console.log(`TC-MS-00${4}: Passed`);
+        else
+            console.error(`TC-MS-00${4}: Failed`);
 };
