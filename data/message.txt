@@ -1,0 +1,4 @@
+msg1:view;success;
+msg2:Student Student;success;
+msg3:alo;success;
+msg4:delete;success;

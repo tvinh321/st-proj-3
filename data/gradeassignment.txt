@@ -1,0 +1,2 @@
+asm1:0;You did nothing;success
+asm2:90;;success

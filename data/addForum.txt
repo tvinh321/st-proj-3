@@ -1,0 +1,4 @@
+af1:;;failed; -- Empty Subject and Message --
+af2:;abc;failed; -- Empty Subject --
+af3:abc;;failed; -- Empty Message --
+af4:abc;abc;success; -- Filled Subject and Message --
