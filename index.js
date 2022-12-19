@@ -1,5 +1,6 @@
 const { Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
+const { PageLoadStrategy } = require("selenium-webdriver/lib/capabilities.js");
 
 // This Chrome Driver is for Chrome Browser 108 !!!!
 const service = new chrome.ServiceBuilder("./browser-drivers/chromedriver.exe");
@@ -31,7 +32,8 @@ const driver = new Builder()
 // const messageTest = require("./testcases/TC-MS.js");
 // const viewForumTest = require("./testcases/TC-VF.js");
 // const addForumTest = require("./testcases/TC-AD.js");
-const gradeAsm = require("./testcases/TC-GA.js");
+// const gradeAsm = require("./testcases/TC-GA.js");
+const pageLoadTest = require("./testcases/TC-PL.js");
 
 
 async function main() {
@@ -53,7 +55,8 @@ async function main() {
   // await messageTest(driver);
   // await viewForumTest(driver);
   // await addForumTest(driver);
-  await gradeAsm(driver);
+  // await gradeAsm(driver);
+  await pageLoadTest(driver);
 }
 
 main();
