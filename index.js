@@ -51,6 +51,24 @@ const replyForum = require("./testcases/TC-RF.js");
 const attemptQuizTest = require("./testcases/TC-AQ.js");
 const addChoiceTest = require("./testcases/TC-AC.js");
 
+const fs = require("fs");
+const fileNames = [1, 5, 9, 10, 11];
+
+fileNames.forEach((fileName) => {
+  // If file name "test{fileName}mb.pdf" exists in ./data/submission, duplicate it
+  if (fs.existsSync(`./data/submission/test${fileName}mb.pdf`)) {
+    fs.copyFileSync(
+      `./data/submission/test${fileName}mb.pdf`,
+      `./data/submission/test${fileName}mb - Copy.pdf`
+    );
+
+    fs.copyFileSync(
+      `./data/submission/test${fileName}mb.pdf`,
+      `./data/submission/test${fileName}mb - Copy (2).pdf`
+    );
+  }
+});
+
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
   await firefoxDriver.manage().window().setRect({ width: 900, height: 1080 });
