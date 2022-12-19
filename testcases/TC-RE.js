@@ -56,11 +56,19 @@ module.exports = async function main(driver) {
 
     await driver.get(responsiveLink);
 
-    // Find meta responsive tag
-    driver.findElement(By.xpath("//meta[@name='viewport']")).then((element) => {
-      console.log(`TC-RE-00${i + 1}: Passed`);
-    }).catch((err) => {
-      console.error(`TC-RE-00${i + 1}: Failed`);
-    });
+    // Find meta viewport tag that contains width=device-width, initial-scale=1.0
+    await driver
+      .findElement(By.xpath("//meta[@name='viewport']"))
+      .getAttribute("content")
+      .then((content) => {
+        if (content.includes("width=device-width, initial-scale=1.0")) {
+          console.log(`TC-RE-00${i + 1}: Passed`);
+        } else {
+          console.error(`TC-RE-00${i + 1}: Failed`);
+        }
+      })
+      .catch((err) => {
+        console.error(`TC-RE-00${i + 1}: Failed`);
+      });
   }
 };

@@ -65,7 +65,8 @@ module.exports = async function main(driver) {
       console.error(`TC-SE-002: Failed`);
     });
 
-  // This test case passed.
+  // This test case will pass if session timeout is 3 mins.
+  // But currently, session timeout is 30 mins for covenient testing.
   // Howerver, it costs much time since it has to wait for session timeout
   // So I commented it for not wasting test time
   // Please uncomment it if you want to test it
