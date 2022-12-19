@@ -28,7 +28,10 @@ const driver = new Builder()
 // const sessionTest = require("./testcases/TC-SE.js");
 // const updateAssignmentTest = require("./testcases/TC-UA.js");
 // const urlTest = require("./testcases/TC-URL.js");
-const messageTest = require("./testcases/TC-MS.js");
+// const messageTest = require("./testcases/TC-MS.js");
+// const viewForumTest = require("./testcases/TC-VF.js");
+const addForumTest = require("./testcases/TC-AD.js");
+
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
@@ -46,7 +49,9 @@ async function main() {
   // await sessionTest(driver);
   // await updateAssignmentTest(driver);
   // await urlTest(driver);
-  await messageTest(driver);
+  // await messageTest(driver);
+  // await viewForumTest(driver);
+  await addForumTest(driver);
 }
 
 main();
