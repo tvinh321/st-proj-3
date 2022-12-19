@@ -33,7 +33,9 @@ const driver = new Builder()
 // const viewForumTest = require("./testcases/TC-VF.js");
 // const addForumTest = require("./testcases/TC-AD.js");
 // const gradeAsm = require("./testcases/TC-GA.js");
-const pageLoadTest = require("./testcases/TC-PL.js");
+// const pageLoadTest = require("./testcases/TC-PL.js");
+// const addA = require("./testcases/TC-AA.js");
+const replyForum = require("./testcases/TC-RF.js");
 
 
 async function main() {
@@ -56,7 +58,9 @@ async function main() {
   // await viewForumTest(driver);
   // await addForumTest(driver);
   // await gradeAsm(driver);
-  await pageLoadTest(driver);
+  // await pageLoadTest(driver);
+  // await addA(driver);
+  await replyForum(driver);
 }
 
 main();
