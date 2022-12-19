@@ -30,7 +30,8 @@ const driver = new Builder()
 // const urlTest = require("./testcases/TC-URL.js");
 // const messageTest = require("./testcases/TC-MS.js");
 // const viewForumTest = require("./testcases/TC-VF.js");
-const addForumTest = require("./testcases/TC-AD.js");
+// const addForumTest = require("./testcases/TC-AD.js");
+const gradeAsm = require("./testcases/TC-GA.js");
 
 
 async function main() {
@@ -51,7 +52,8 @@ async function main() {
   // await urlTest(driver);
   // await messageTest(driver);
   // await viewForumTest(driver);
-  await addForumTest(driver);
+  // await addForumTest(driver);
+  await gradeAsm(driver);
 }
 
 main();
