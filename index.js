@@ -15,32 +15,38 @@ const driver = new Builder()
   .build();
 
 // Import each testcases
-const loginTest = require("./testcases/TC-LG");
-const logoutTest = require("./testcases/TC-LO");
-const enrollTest = require("./testcases/TC-ER");
-const downloadTest = require("./testcases/TC-DF");
-const blogTest = require("./testcases/TC-BL");
-const assignmentSubmissionTest = require("./testcases/TC-AS.js");
-const removeAssignmentTest = require("./testcases/TC-RA.js");
-const courseSearchTest = require("./testcases/TC-CS.js");
-const courseViewTest = require("./testcases/TC-CV.js");
-const responsiveTest = require("./testcases/TC-RE.js");
-const sessionTest = require("./testcases/TC-SE.js");
+// const loginTest = require("./testcases/TC-LG");
+// const logoutTest = require("./testcases/TC-LO");
+// const enrollTest = require("./testcases/TC-ER");
+// const downloadTest = require("./testcases/TC-DF");
+// const blogTest = require("./testcases/TC-BL");
+// const assignmentSubmissionTest = require("./testcases/TC-AS.js");
+// const removeAssignmentTest = require("./testcases/TC-RA.js");
+// const courseSearchTest = require("./testcases/TC-CS.js");
+// const courseViewTest = require("./testcases/TC-CV.js");
+// const responsiveTest = require("./testcases/TC-RE.js");
+// const sessionTest = require("./testcases/TC-SE.js");
+// const updateAssignmentTest = require("./testcases/TC-UA.js");
+// const urlTest = require("./testcases/TC-URL.js");
+const messageTest = require("./testcases/TC-MS.js");
 
 async function main() {
   await driver.manage().window().setRect({ width: 900, height: 1080 });
 
-  await loginTest(driver);
-  await logoutTest(driver);
-  await enrollTest(driver);
-  await blogTest(driver);
-  await downloadTest(driver);
-  await assignmentSubmissionTest(driver);
-  await removeAssignmentTest(driver);
-  await courseSearchTest(driver);
-  await courseViewTest(driver);
-  await responsiveTest(driver);
-  await sessionTest(driver);
+  // await loginTest(driver);
+  // await logoutTest(driver);
+  // await enrollTest(driver);
+  // await blogTest(driver);
+  // await downloadTest(driver);
+  // await assignmentSubmissionTest(driver);
+  // await removeAssignmentTest(driver);
+  // await courseSearchTest(driver);
+  // await courseViewTest(driver);
+  // await responsiveTest(driver);
+  // await sessionTest(driver);
+  // await updateAssignmentTest(driver);
+  // await urlTest(driver);
+  await messageTest(driver);
 }
 
 main();
